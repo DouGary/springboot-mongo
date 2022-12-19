@@ -23,6 +23,7 @@ public class Scpool implements Serializable {
 	private double inPrice;
 	private double outPrice;
 
+
 	public String getStatus() {
 		return status;
 	}

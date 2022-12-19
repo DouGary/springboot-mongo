@@ -146,6 +146,7 @@ public class DailyController {
 //				}
 
 
+
 //				this.longTermIndexRisk(nowStr,endDateStr);
 //				this.shortTermIndexRisk(nowStr,endDateStr);
 

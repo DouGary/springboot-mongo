@@ -11,6 +11,7 @@ public class LongTouIndexPro implements  java.io.Serializable{
     @Id
     private String id;
 
+
 	private int index;
 
 
