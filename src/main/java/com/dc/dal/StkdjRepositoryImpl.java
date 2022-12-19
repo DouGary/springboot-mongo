@@ -174,4 +174,25 @@ public class StkdjRepositoryImpl implements StkdjRepositoryDAL {
     }
 
 
+    @Override
+    public List<Stkdj> findSTKDJByCodeAndBeforeDateASC(String code, String startDate, String endDate) throws Exception {
+        List<Stkdj> queryResults = null;
+        try {
+            Query query = new Query();
+
+            query.addCriteria(where("ts_code").is(code));
+            query.addCriteria(where("trade_date").lte(endDate).andOperator(where("trade_date").gte(startDate)));
+//			query.addCriteria(where("trade_date").gte(startDate));
+            query.with(Sort.by(Sort.Order.asc("trade_date")));
+
+            queryResults = mongoTemplate.find(query, Stkdj.class);
+
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return queryResults;
+    }
+
+
 }

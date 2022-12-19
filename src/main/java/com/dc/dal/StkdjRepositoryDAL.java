@@ -25,4 +25,6 @@ public interface StkdjRepositoryDAL {
 
     public List<Stkdj> findStkdjReqByStockcodeAndDate(String stockcode, String date) throws Exception;
 
+    public List<Stkdj> findSTKDJByCodeAndBeforeDateASC(String code, String endDate, String startDate) throws Exception;
+
 }

@@ -22,9 +22,47 @@ public class Scpool implements Serializable {
 	private double profit;
 	private double inPrice;
 	private double outPrice;
-	
-	
-	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	private String status;
+	// 1 : 清仓
+	private int sellAllOut;
+
+	private double highTG;
+
+	private String oriCreateTime;
+
+	public int getSellAllOut() {
+		return sellAllOut;
+	}
+
+	public void setSellAllOut(int sellAllOut) {
+		this.sellAllOut = sellAllOut;
+	}
+
+	public double getHighTG() {
+		return highTG;
+	}
+
+	public void setHighTG(double highTG) {
+		this.highTG = highTG;
+	}
+
+	public String getOriCreateTime() {
+		return oriCreateTime;
+	}
+
+	public void setOriCreateTime(String oriCreateTime) {
+		this.oriCreateTime = oriCreateTime;
+	}
+
 	public Scpool(){
 		
 	}

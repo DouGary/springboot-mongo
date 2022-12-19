@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -125,4 +126,52 @@ public class ScpoolRepositoryImpl implements ScpoolRepositoryDAL {
 		return queryResults;
 	}
 
+	@Override
+	public void updateStatusAndSellAllOutScpoolById(Scpool scpool)throws Exception
+	{
+		try {
+			Query query = new Query(where("_id").is(scpool.getId()));
+			Update update = new Update();
+			update.set("status", scpool.getStatus());
+			update.set("sellAllOut", scpool.getSellAllOut());
+			mongoTemplate.updateFirst(query, update, Scpool.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Scpool> findAllScpoolGteEndDateStrAndSellAllOut(String startDateStr, String nowDate, boolean is88, List<String> monitor, int sellAllOut) throws Exception {
+		// TODO Auto-generated method stub
+		List<Scpool> queryResults = new ArrayList<>();
+		try {
+			Query query = new Query();
+			query.addCriteria(where("createTime").gte(startDateStr).andOperator(where("createTime").lte(nowDate)));
+//			query.addCriteria(where("sellAllOut").lte(sellAllOut));
+			if(is88){
+				Criteria c = new Criteria("monitor").in(monitor);
+
+//				Criteria c = where("monitor").is(monitor.get(0));
+//				int i=0;
+//				for (String s : monitor) {
+//					if(i==0) {
+//						i++;
+//						continue;
+//					}
+//					c.inorOperator(where("monitor").is(s));
+//
+//				}
+				query.addCriteria(c);
+				query.with(Sort.by(Sort.Order.desc("createTime")));
+			}
+
+			queryResults = mongoTemplate.find(query, Scpool.class);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return queryResults;
+	}
 }

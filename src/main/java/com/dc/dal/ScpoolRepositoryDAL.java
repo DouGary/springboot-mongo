@@ -20,4 +20,8 @@ public interface ScpoolRepositoryDAL {
 
 	public List<Scpool> findAllScpoolGteEndDateStr(String endDateStr,String nowDate,boolean is88,List<String> monitor) throws Exception;
 
+
+	public List<Scpool> findAllScpoolGteEndDateStrAndSellAllOut(String endDateStr, String nowDate, boolean is88, List<String> monitor, int sellAllOut) throws Exception;
+
+	public void updateStatusAndSellAllOutScpoolById(Scpool scpool)throws Exception;
 }
