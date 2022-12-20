@@ -1,6 +1,5 @@
 package com.dc.contrlloer;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +16,7 @@ import javax.mail.internet.MimeMessage;
 import com.dc.model.StockCode;
 
 import com.dc.service.*;
-import com.dc.service.Monitor4ASC815_22_8878;
+import com.dc.service.Monitor_8878;
 import com.dc.utils.Helper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,16 +39,16 @@ public class DailyController {
 //	private indexCodeDataRepository indexCodeDataRepository;
 
 	@Autowired
-	Monitor4ASC815_22_8878 monitor4ASC815_22_8878;
+	Monitor_8878 monitor_8878;
 
 	@Autowired
 	Monitor4ASC815_22_881 monitor4ASC815_22_881;
 
 	@Autowired
-	Monitor4ASC815_22_8848 monitor4ASC815_22_8848;
+	Monitor_8848 monitor_8848;
 
 	@Autowired
-	Monitor4ASC815_22_8858 monitor4ASC815_22_8858;
+	Monitor_8858 monitor_8858;
 	@Autowired
 	Monitor4ASC815_22_88884 monitor4ASC815_22_88884;
 
@@ -60,30 +59,30 @@ public class DailyController {
 	Monitor4ASC815_22_88781 monitor4ASC815_22_88781;
 
 	@Autowired
-	Monitor4ASC815_22_888884 monitor4ASC815_22_888884;
+	Monitor_888884 monitor_888884;
 
 	@Autowired
-	Monitor4ASC815_22_888887 monitor4ASC815_22_888887;
+	Monitor_888887 monitor_888887;
 	@Autowired
-	Monitor4ASC815_22_888888 monitor4ASC815_22_888888;
+	Monitor_888888 monitor_888888;
 
 	@Autowired
-	Monitor4ASC815_22_99999 monitor4ASC815_22_99999;
+	Monitor_99999 monitor_99999;
 
 	@Autowired
-	Monitor4ASC815_22_999991 monitor4ASC815_22_999991;
+	Monitor_999991 monitor_999991;
 
 	@Autowired
-	Monitor4ASC815_22_999992 monitor4ASC815_22_999992;
+	Monitor_999992 monitor_999992;
 
 	@Autowired
-	Monitor4ASC815_22_999993 monitor4ASC815_22_999993;
+	Monitor_999993 monitor_999993;
 
 //	@Autowired
 //	Monitor4ASC815_22_9999931 monitor4ASC815_22_9999931;
 
 	@Autowired
-	Monitor4ASC815_22_999994 monitor4ASC815_22_999994;
+	Monitor_999994 monitor_999994;
 
 //	@Autowired
 //	Monitor4ASC815_22_99881 monitor4ASC815_22_99881;
@@ -158,7 +157,7 @@ public class DailyController {
 				}
 
 				System.out.println("monitor4ASC815_22_8878 and date="+endDateStr);
-				List<StockCode> Results8878 = monitor4ASC815_22_8878.getFinal(endDateStr);
+				List<StockCode> Results8878 = monitor_8878.getFinal(endDateStr);
 				if(nowStr.equals(endDateStr)){
 					sendEmailWithDate(Results8878, 8878, endDateStr);
 				}
@@ -179,7 +178,7 @@ public class DailyController {
 
 				// 底部 第一板 反包
 				System.out.println("monitor4ASC815_22_8888884 and date="+endDateStr);
-				List<StockCode> Results888884 = monitor4ASC815_22_888884.getFinal(endDateStr);
+				List<StockCode> Results888884 = monitor_888884.getFinal(endDateStr);
 				if(nowStr.equals(endDateStr)){
 					sendEmailWithDate(Results888884, 888884, endDateStr);
 				}
@@ -193,49 +192,49 @@ public class DailyController {
 
 				// 不中断涨停板统计
 				System.out.println("monitor4ASC815_22_888887 and date="+endDateStr);
-				List<StockCode> Results888887 = monitor4ASC815_22_888887.getFinal(endDateStr);
+				List<StockCode> Results888887 = monitor_888887.getFinal(endDateStr);
 				if(nowStr.equals(endDateStr)){
 					sendEmailWithDate(Results888887, 888887, endDateStr);
 				}
 
 				System.out.println("monitor4ASC815_22_888888 and date="+endDateStr);
-				List<StockCode> Results888888 = monitor4ASC815_22_888888.getFinal(endDateStr);
+				List<StockCode> Results888888 = monitor_888888.getFinal(endDateStr);
 				if(nowStr.equals(endDateStr)){
 					sendEmailWithDate(Results888888, 888888, endDateStr);
 				}
 
 				//  对所有策略的观察，回打中轨
 				System.out.println("monitor4ASC815_22_8848 and date="+endDateStr);
-				List<StockCode> Results8848 = monitor4ASC815_22_8848.getFinal(endDateStr);
+				List<StockCode> Results8848 = monitor_8848.getFinal(endDateStr);
 				if(nowStr.equals(endDateStr)){
 					sendEmailWithDate(Results8848, 8848, endDateStr);
 				}
 
 				//  对所有策略的观察，回打中轨
 				System.out.println("monitor4ASC815_22_8858 and date="+endDateStr);
-				List<StockCode> Results8858 = monitor4ASC815_22_8858.getFinal(endDateStr);
+				List<StockCode> Results8858 = monitor_8858.getFinal(endDateStr);
 				if(nowStr.equals(endDateStr)){
 					sendEmailWithDate(Results8858, 8858, endDateStr);
 				}
 
 				// 99999 - 跟踪策略
 				System.out.println("monitor4ASC815_22_99999 and date="+endDateStr);
-				List<StockCode> Results99999 = monitor4ASC815_22_99999.getFinal(endDateStr);
+				List<StockCode> Results99999 = monitor_99999.getFinal(endDateStr);
 				// 99999 - 跟踪策略 缩量三分之一
 				System.out.println("monitor4ASC815_22_999991 and date="+endDateStr);
-				List<StockCode> Results999991 = monitor4ASC815_22_999991.getFinal(endDateStr);
+				List<StockCode> Results999991 = monitor_999991.getFinal(endDateStr);
 				// 排序
 				System.out.println("monitor4A SC815_22_999992 and date="+endDateStr);
-				List<StockCode> Results999992 = monitor4ASC815_22_999992.getFinal(endDateStr);
+				List<StockCode> Results999992 = monitor_999992.getFinal(endDateStr);
 				// 上升趋势
 				System.out.println("monitor4A SC815_22_999993 and date="+endDateStr);
-				List<StockCode> Results999993 = monitor4ASC815_22_999993.getFinal(endDateStr);
+				List<StockCode> Results999993 = monitor_999993.getFinal(endDateStr);
 				// 上升趋势
 //				System.out.println("monitor4A SC815_22_9999931 and date="+endDateStr);
 //				List<StockCode> Results9999931 = monitor4ASC815_22_9999931.getFinal(endDateStr);
 				// 上升趋势且回调到中轨附近
 				System.out.println("monitor4A SC815_22_999994 and date="+endDateStr);
-				List<StockCode> Results999994 = monitor4ASC815_22_999994.getFinal(endDateStr);
+				List<StockCode> Results999994 = monitor_999994.getFinal(endDateStr);
 				// 监控881，boll.mid重新递增
 //				System.out.println("monitor4A SC815_22_99881 and date="+endDateStr);
 //				List<StockCode> Results99881 = monitor4ASC815_22_99881.getFinal(endDateStr);
