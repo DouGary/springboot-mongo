@@ -1,21 +1,19 @@
 package com.dc.service;
 
-
 import com.dc.dal.*;
 import com.dc.model.*;
 import com.dc.utils.Helper;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.*;
-
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Component
-public class Monitor_999995 {
+public class Monitor_9999931 {
 	@Autowired
 	private StockCodeRepository stockCodeRepository;
 
@@ -46,7 +44,7 @@ public class Monitor_999995 {
 	@Autowired
 	private Helper helper;
 	
-	Logger logger = LogManager.getLogger(Monitor_999995.class);
+	Logger logger = LogManager.getLogger(Monitor_9999931.class);
 
 	public List<StockCode> getFinal(String endDateStr) throws Exception
 	{
@@ -55,21 +53,23 @@ public class Monitor_999995 {
 
 		SimpleDateFormat format =  new SimpleDateFormat( "yyyyMMdd");
 
-		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-1200); // 要当天
+		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-100); // 要当天
         List<String> monitors = new ArrayList<>();
 		// 88884，888884，8828，881，8818，8878，88781
 //		monitors.add("888846");
-//		monitors.add("8888461");
+		monitors.add("8888461");
 //		monitors.add("8888462");
 //		monitors.add("8888463");
-//		monitors.add("8888464");
+		monitors.add("8888464");
 //		monitors.add("8888465");
 //		monitors.add("88884");
 //		monitors.add("888884");
 //		monitors.add("88");
-//		monitors.add("881");
+		monitors.add("881");
 //		monitors.add("8818");
 //		monitors.add("8828");
+//		monitors.add("8838");
+//		monitors.add("88381");
 //		monitors.add("889");
 //		monitors.add("8898");
 //		monitors.add("8868");
@@ -83,24 +83,45 @@ public class Monitor_999995 {
 		List<Scpool> ascList = new LinkedList<>();
 		for (Scpool scpool : scLst) {
 			// 1 天 当天
-			List<HistorytradeInfo> resultList2Days  = historytradeInfoRepository.findHistorytradeInfoByDesc4MA30_MA60_ASC(scpool.getCode(), scpool.getCreateTime(), endDateStr);
-
-			if(resultList2Days.size()<6){
-				continue;
-			}
+			List<HistorytradeInfo> resultList2Days  = historytradeInfoRepository.findHistorytradeInfoByDesc4MA30_MA60(scpool.getCode(), scpool.getCreateTime(), endDateStr);
 
 			double previousMa20 = 0.0;
 			int days = 0;
 			boolean isASC = true;
-
-			double highest = helper.computeHighestHighPrice4kdjNoFirstDay(resultList2Days,5);
-			double ratio = ((highest - resultList2Days.get(1).getClose()) / resultList2Days.get(1).getClose())*100;
-
-			if(ratio>2){
+			for(HistorytradeInfo historytradeInfo : resultList2Days ){
+				if(days==1) break;
+				if(days==0){
+					previousMa20 = historytradeInfo.getMa20();
+					if(historytradeInfo.getPct_chg()>9.8  ){
+						scpool.setProfit(historytradeInfo.getPct_chg());
+						if(scpool.getCreateTime().equals(endDateStr)){
+							isASC = false;
+							break;
+						}
+					}else {
+						isASC = false;
+						break;
+					}
+//					if(historytradeInfo.getLow()<historytradeInfo.getMa20()
+//							|| (historytradeInfo.getLow()/historytradeInfo.getMa20() >0.98 &&
+//							historytradeInfo.getLow()/historytradeInfo.getMa20() <1.02)){
+//						if(historytradeInfo.getClose()>historytradeInfo.getMa20()){
+//							scpool.setOriCreateTime("靠近或击穿中轨");
+//						}
+//					}
+				} else {
+//					if(previousMa20<historytradeInfo.getMa20()){
+//						isASC = false;
+//						 break;
+//					} else {
+//						previousMa20 = historytradeInfo.getMa20();
+//					}
+				}
+				days++;
+			}
+			if(isASC){
 				ascList.add(scpool);
 			}
-
-
 		}
 
 		//将map.entrySet()转换成list
@@ -114,14 +135,27 @@ public class Monitor_999995 {
 //			}
 //		});
 
-		System.out.println("出票后6天内直接拉升超过10个点的票总数："+ascList.size() );
-//		for (scpool scpool : ascList) {
+		for (Scpool scpool : ascList) {
+			StringBuffer allScpoolStatus2 = new StringBuffer();
 //			if(mapping.getValue()>=2){
-//				allScpoolStatus.append(mapping.getKey() + "  策略个数:" + mapping.getValue()+"  策略:"+resultMapWithMonitor.get(mapping.getKey())  + " <br><br>");
+				allScpoolStatus.append(scpool.getCode()+ "  "+ scpool.getName() + "  " +scpool.getMonitor()+ "  " +scpool.getCreateTime()  + " ");
+			allScpoolStatus2.append(scpool.getCode()+ "  "+ scpool.getName() + "  " +scpool.getMonitor()+ "  " +scpool.getCreateTime()  + " ");
 //			}
-//			System.out.println(scpool.getCode()+ "  "+ scpool.getName() + "  " +scpool.getMonitor()+ "  " +scpool.getCreateTime() );
+			if(scpool.getProfit()>7){
+				allScpoolStatus.append(scpool.getProfit());
+				allScpoolStatus2.append(scpool.getProfit());
+			}
 
-//		}
+			if(scpool.getOriCreateTime()!=null && scpool.getOriCreateTime().length()>3){
+				allScpoolStatus.append( "  "+scpool.getOriCreateTime()+ "  ");
+				allScpoolStatus2.append( "  "+scpool.getOriCreateTime()+ "  ");
+			}
+
+			allScpoolStatus.append("  <br><br>");
+
+			System.out.println(allScpoolStatus2.toString());
+
+		}
 
 //		scpool scpool = new scpool(result.getNAME(),result.getSYMBOL(), "8858",endDateStr,historytradeInfo.getTrade_date(),historytradeInfo.getOpen());
 //		scpoolRepository.save(scpool);
@@ -129,7 +163,7 @@ public class Monitor_999995 {
 
 
 		// 发email
-		//helper.sendEmail(allScpoolStatus.toString(),999992,endDateStr);
+		helper.sendEmail(allScpoolStatus.toString(),9999931,endDateStr);
 
 //		System.out.println(">>>>>>>>>>>>>>>>>> result.size="+Results.size());
 //		for (stockCode result : Results) {

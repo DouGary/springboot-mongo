@@ -81,11 +81,18 @@ public class DailyController {
 	@Autowired
 	Monitor_999993 monitor_999993;
 
+
+	@Autowired
+	Monitor_999993 monitor_9999931;
+
 //	@Autowired
 //	Monitor4ASC815_22_9999931 monitor4ASC815_22_9999931;
 
 	@Autowired
 	Monitor_999994 monitor_999994;
+
+	@Autowired
+	Monitor_99881 monitor_99881;
 
 //	@Autowired
 //	Monitor4ASC815_22_99881 monitor4ASC815_22_99881;
@@ -233,14 +240,14 @@ public class DailyController {
 				System.out.println("monitor4A SC815_22_999993 and date="+endDateStr);
 				List<StockCode> Results999993 = monitor_999993.getFinal(endDateStr);
 				// 上升趋势
-//				System.out.println("monitor4A SC815_22_9999931 and date="+endDateStr);
-//				List<StockCode> Results9999931 = monitor4ASC815_22_9999931.getFinal(endDateStr);
+				System.out.println("monitor4A SC815_22_9999931 and date="+endDateStr);
+				List<StockCode> Results9999931 = monitor_9999931.getFinal(endDateStr);
 				// 上升趋势且回调到中轨附近
 				System.out.println("monitor4A SC815_22_999994 and date="+endDateStr);
 				List<StockCode> Results999994 = monitor_999994.getFinal(endDateStr);
 				// 监控881，boll.mid重新递增
-//				System.out.println("monitor4A SC815_22_99881 and date="+endDateStr);
-//				List<StockCode> Results99881 = monitor4ASC815_22_99881.getFinal(endDateStr);
+				System.out.println("monitor4A SC815_22_99881 and date="+endDateStr);
+				List<StockCode> Results99881 = monitor_99881.getFinal(endDateStr);
 
 
 

@@ -1,21 +1,19 @@
 package com.dc.service;
 
-
 import com.dc.dal.*;
 import com.dc.model.*;
 import com.dc.utils.Helper;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.*;
-
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Component
-public class Monitor_999996 {
+public class Monitor_99881 {
 	@Autowired
 	private StockCodeRepository stockCodeRepository;
 
@@ -46,7 +44,7 @@ public class Monitor_999996 {
 	@Autowired
 	private Helper helper;
 	
-	Logger logger = LogManager.getLogger(Monitor_999996.class);
+	Logger logger = LogManager.getLogger(Monitor_99881.class);
 
 	public List<StockCode> getFinal(String endDateStr) throws Exception
 	{
@@ -55,78 +53,96 @@ public class Monitor_999996 {
 
 		SimpleDateFormat format =  new SimpleDateFormat( "yyyyMMdd");
 
-		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-200); // 要当天
+		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-100); // 要当天
         List<String> monitors = new ArrayList<>();
 		// 88884，888884，8828，881，8818，8878，88781
 //		monitors.add("888846");
-//		monitors.add("8888461");
+		monitors.add("88884641");
 //		monitors.add("8888462");
 //		monitors.add("8888463");
-//		monitors.add("8888464");
+//		monitors.add("88884641");
 //		monitors.add("8888465");
-//		monitors.add("88884");
-//		monitors.add("888884");
+		monitors.add("88884");
+		monitors.add("888884");
 //		monitors.add("88");
 		monitors.add("881");
 //		monitors.add("8818");
 //		monitors.add("8828");
+//		monitors.add("8838");
+//		monitors.add("88381");
 //		monitors.add("889");
 //		monitors.add("8898");
 //		monitors.add("8868");
-//		monitors.add("8878");
-//		monitors.add("88781");
+		monitors.add("8878");
+		monitors.add("88781");
 		List<Scpool> scLst = scpoolRepository.findAllScpoolGteEndDateStrAndSellAllOut(startDate100DaysBeforeStr,endDateStr,true,monitors,1);
 
 		StringBuffer allScpoolStatus = new StringBuffer();
 		Map<String,Integer> resultMap = new HashMap<>();
 		Map<String,String> resultMapWithMonitor = new HashMap<>();
 		List<Scpool> ascList = new LinkedList<>();
-		double preBollMid = 0.0;
-
 		for (Scpool scpool : scLst) {
+			String createTimeAdd1Day = helper.getStartDateStr15daysBefore(scpool.getCreateTime(),1); // 要当天
+			if(endDateStr.equals(createTimeAdd1Day)){
+				continue;
+			}
 			// 1 天 当天
 			List<HistorytradeInfo> resultList2Days  = historytradeInfoRepository.findHistorytradeInfoByDesc4MA30_MA60(scpool.getCode(), scpool.getCreateTime(), endDateStr);
 
-			if(resultList2Days.size()<30){
+			if(resultList2Days.size()<=1){
 				continue;
 			}
+			double previousMa20 = 0.0;
 			int days = 0;
-			boolean isYao = true;
-			for(HistorytradeInfo historytradeInfo:resultList2Days){
+			boolean isASC = false;
+			for(HistorytradeInfo historytradeInfo : resultList2Days ){
+				if(days==3) break;
 
+//				double ratio = historytradeInfo.getLow() / historytradeInfo.getMa20();
 				if(days==0){
-					// 出票的 第0天
-					preBollMid = historytradeInfo.getMa20();
-					if(!historytradeInfo.getTrade_date().equals(endDateStr)){
-						isYao = false;
-						break;
-					}
+					previousMa20 = historytradeInfo.getMa20();
+
+//					if(ratio<1.013){
+//
+//					} else {
+//						isASC = false;
+//						break;
+//					}
 				} else {
+//					if(ratio<1.013){
+//						isASC = false;
+//						break;
+//					}
+
 					if(days==1){
-						// 第一天重新开始递增
-						if(preBollMid>historytradeInfo.getMa20()){
-							preBollMid = historytradeInfo.getMa20();
+
+						if(previousMa20>historytradeInfo.getMa20()){
+							isASC = true;
+							previousMa20 = historytradeInfo.getMa20();
+//							break;
 						} else {
-							isYao = false;
+							isASC = false;
+							previousMa20 = historytradeInfo.getMa20();
 							break;
 						}
-					} else if(days>1 && days <=30){
-						// 30个交易日递减
-						if(preBollMid>historytradeInfo.getMa20()){
-							isYao = false;
+					} else if(days==2){
+						if(previousMa20<historytradeInfo.getMa20()){
+							isASC = true;
 							break;
 						} else {
-							preBollMid = historytradeInfo.getMa20();
+							isASC = false;
+//							previousMa20 = historytradeInfo.getMa20();
+							break;
 						}
 					}
+
 				}
 				days++;
 			}
+			if(isASC){
 
-			if(isYao){
 				ascList.add(scpool);
 			}
-
 		}
 
 		//将map.entrySet()转换成list
@@ -140,10 +156,9 @@ public class Monitor_999996 {
 //			}
 //		});
 
-		System.out.println("出票后6天内直接拉升超过10个点的票总数："+ascList.size() );
 		for (Scpool scpool : ascList) {
 //			if(mapping.getValue()>=2){
-//				allScpoolStatus.append(mapping.getKey() + "  策略个数:" + mapping.getValue()+"  策略:"+resultMapWithMonitor.get(mapping.getKey())  + " <br><br>");
+			allScpoolStatus.append(scpool.getCode()+ "  "+ scpool.getName() + "  " +scpool.getMonitor()+ "  " +scpool.getCreateTime()  + " <br><br>");
 //			}
 			System.out.println(scpool.getCode()+ "  "+ scpool.getName() + "  " +scpool.getMonitor()+ "  " +scpool.getCreateTime() );
 
@@ -155,7 +170,11 @@ public class Monitor_999996 {
 
 
 		// 发email
-		//helper.sendEmail(allScpoolStatus.toString(),999992,endDateStr);
+//		helper.sendEmail(allScpoolStatus.toString(),99881,endDateStr);
+
+
+
+
 
 //		System.out.println(">>>>>>>>>>>>>>>>>> result.size="+Results.size());
 //		for (stockCode result : Results) {
