@@ -1,5 +1,6 @@
 package com.dc.contrlloer;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.dc.dal.IndexCodeDataRepository;
+import com.dc.model.IndexCodeData;
 import com.dc.model.StockCode;
 
 import com.dc.service.*;
@@ -35,8 +38,8 @@ public class DailyController {
 //	stFundInfoRepository stFundInfoRepository;
 
 
-//	@Autowired
-//	private indexCodeDataRepository indexCodeDataRepository;
+	@Autowired
+	private IndexCodeDataRepository indexCodeDataRepository;
 
 	@Autowired
 	Monitor_8878 monitor_8878;
@@ -146,8 +149,8 @@ public class DailyController {
 
 
 
-//				this.longTermIndexRisk(nowStr,endDateStr);
-//				this.shortTermIndexRisk(nowStr,endDateStr);
+				this.longTermIndexRisk(nowStr,endDateStr);
+				this.shortTermIndexRisk(nowStr,endDateStr);
 
 				// 突破 第一板
 				System.out.println("monitor4ASC815_22_8888464 and date="+endDateStr);
@@ -1147,257 +1150,257 @@ public class DailyController {
 		}
 	}
 
-//	private void longTermIndexRisk(String nowStr, String endDateStr) throws Exception{
-//		// 上证指数
-//		boolean is0000001Index = this.isIndexData("000001.SH",endDateStr);
-//		// 深圳成指
-//		boolean is1399001Index = this.isIndexData("399001.SZ",endDateStr);
-//		// 创业板指
-//		boolean is1399006Index = this.isIndexData("399006.SZ",endDateStr);
-//		int riskIndex = 0;
-//		if(!is0000001Index || !is1399001Index || !is1399006Index){
-//			if(!is0000001Index){
-//				riskIndex = riskIndex +3;
-//			}
-//			if(!is1399001Index){
-//				riskIndex = riskIndex +3;
-//			}
-//			if(!is1399006Index){
-//				riskIndex = riskIndex +3;
-//			}
-//			if(nowStr.equals(endDateStr)){
-//				sendEmail_0815_22_32("<p>中长期系统性风险已经发生，系统风险预警指数为：<b>"+riskIndex+"</b></p>, <br><br> <p><b><font color=\"#FF0000\" size=\"10\">请减仓、轻仓、清仓！！！！！！！</font></b></p>", 111111, endDateStr);
-//			}
-//		} else {
-//			if(nowStr.equals(endDateStr)){
-//				sendEmail_0815_22_32("<p>未发生中长期系统性风险</p>, <br><br> <p><b><font color=\"#0000FF\" size=\"10\">请正常加减仓、正常持有。</font></b></p>", 111111, endDateStr);
-//			}
-//		}
-//	}
+	private void longTermIndexRisk(String nowStr, String endDateStr) throws Exception{
+		// 上证指数
+		boolean is0000001Index = this.isIndexData("000001.SH",endDateStr);
+		// 深圳成指
+		boolean is1399001Index = this.isIndexData("399001.SZ",endDateStr);
+		// 创业板指
+		boolean is1399006Index = this.isIndexData("399006.SZ",endDateStr);
+		int riskIndex = 0;
+		if(!is0000001Index || !is1399001Index || !is1399006Index){
+			if(!is0000001Index){
+				riskIndex = riskIndex +3;
+			}
+			if(!is1399001Index){
+				riskIndex = riskIndex +3;
+			}
+			if(!is1399006Index){
+				riskIndex = riskIndex +3;
+			}
+			if(nowStr.equals(endDateStr)){
+				sendEmail_0815_22_32("<p>中长期系统性风险已经发生，系统风险预警指数为：<b>"+riskIndex+"</b></p>, <br><br> <p><b><font color=\"#FF0000\" size=\"10\">请减仓、轻仓、清仓！！！！！！！</font></b></p>", 111111, endDateStr);
+			}
+		} else {
+			if(nowStr.equals(endDateStr)){
+				sendEmail_0815_22_32("<p>未发生中长期系统性风险</p>, <br><br> <p><b><font color=\"#0000FF\" size=\"10\">请正常加减仓、正常持有。</font></b></p>", 111111, endDateStr);
+			}
+		}
+	}
 
-//	private void shortTermIndexRisk(String nowStr, String endDateStr) throws Exception{
-//		// 上证指数
-//		boolean is0000001Index = this.isIndexData4Ma5("000001.SH",endDateStr);
-//		// 深圳成指
-//		boolean is1399001Index = this.isIndexData4Ma5("399001.SZ",endDateStr);
-//		// 创业板指
-//		boolean is1399006Index = this.isIndexData4Ma5("399006.SZ",endDateStr);
-//		int riskIndex = 0;
-//		if(!is0000001Index || !is1399001Index || !is1399006Index){
-//			if(!is0000001Index){
-//				riskIndex = riskIndex +3;
-//			}
-//			if(!is1399001Index){
-//				riskIndex = riskIndex +3;
-//			}
-//			if(!is1399006Index){
-//				riskIndex = riskIndex +3;
-//			}
-//			if(nowStr.equals(endDateStr)){
-//				sendEmail_0815_22_32("<p>短期期系统性风险已经发生，系统风险预警指数为：<b>"+riskIndex+"</b></p>, <br><br> <p><b><font color=\"#FF0000\" size=\"10\">请减仓、轻仓、清仓！！！！！！！</font></b></p>", 333333, endDateStr);
-//			}
-//		} else {
-//			if(nowStr.equals(endDateStr)){
-//				sendEmail_0815_22_32("<p>未发生短期系统性风险</p>, <br><br> <p><b><font color=\"#0000FF\" size=\"10\">请正常加减仓、正常持有。</font></b></p>", 333333, endDateStr);
-//			}
-//		}
-//	}
+	private void shortTermIndexRisk(String nowStr, String endDateStr) throws Exception{
+		// 上证指数
+		boolean is0000001Index = this.isIndexData4Ma5("000001.SH",endDateStr);
+		// 深圳成指
+		boolean is1399001Index = this.isIndexData4Ma5("399001.SZ",endDateStr);
+		// 创业板指
+		boolean is1399006Index = this.isIndexData4Ma5("399006.SZ",endDateStr);
+		int riskIndex = 0;
+		if(!is0000001Index || !is1399001Index || !is1399006Index){
+			if(!is0000001Index){
+				riskIndex = riskIndex +3;
+			}
+			if(!is1399001Index){
+				riskIndex = riskIndex +3;
+			}
+			if(!is1399006Index){
+				riskIndex = riskIndex +3;
+			}
+			if(nowStr.equals(endDateStr)){
+				sendEmail_0815_22_32("<p>短期期系统性风险已经发生，系统风险预警指数为：<b>"+riskIndex+"</b></p>, <br><br> <p><b><font color=\"#FF0000\" size=\"10\">请减仓、轻仓、清仓！！！！！！！</font></b></p>", 333333, endDateStr);
+			}
+		} else {
+			if(nowStr.equals(endDateStr)){
+				sendEmail_0815_22_32("<p>未发生短期系统性风险</p>, <br><br> <p><b><font color=\"#0000FF\" size=\"10\">请正常加减仓、正常持有。</font></b></p>", 333333, endDateStr);
+			}
+		}
+	}
 
-//	private boolean isIndexData(String code, String endDateStr)throws Exception{
-//		boolean passIndex = false;
-//		String newStartDate = helper.getStartDateStr360DaysBefore(endDateStr); // 要当天
-//
-//		List<indexCodeData> indexCodeDataList  = indexCodeDataRepository.findIndexData(code, newStartDate, endDateStr);
-//
-//		int days4His = 0;
-//		double previousDaysMa240 = 0.0;
-//		double previousDaysMa20 = 0.0;
-//		for(indexCodeData indexCodeData:indexCodeDataList){
-//
-//			boolean isNeedUpdate = false;
-//
-//			String newEndDateStr = indexCodeData.getTrade_date();
-////			String newEndDateStr = dateUtils.dateToStr(newEndDate);
-//
-//			if(indexCodeData.getMa5()==0.0){
-//				String newStartDateStr = helper.getStartDateStr360DaysBefore(newEndDateStr); // 要当天
-//				List<indexCodeData> newResultList2Days  = indexCodeDataRepository.findIndexData(code, newStartDateStr, newEndDateStr);
-//
-//				if(indexCodeData.getMa5()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 5);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa5(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa10()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 10);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa10(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa20()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 20);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa20(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa30()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 30);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa30(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa60()==0.0){
-//					double day1MA60 = helper.computeMA30_MA60Index(newResultList2Days, 60);
-//					BigDecimal b60 = new BigDecimal(day1MA60);
-//					day1MA60 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa60(day1MA60);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa120()==0.0){
-//					double day1MA120 = helper.computeMA30_MA60Index(newResultList2Days, 120);
-//					BigDecimal b120 = new BigDecimal(day1MA120);
-//					day1MA120 = b120.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa120(day1MA120);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa240()==0.0){
-//					double day1MA250 = helper.computeMA30_MA60Index(newResultList2Days, 250);
-//					BigDecimal b250 = new BigDecimal(day1MA250);
-//					day1MA250 = b250.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa240(day1MA250);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(isNeedUpdate){
-//					indexCodeDataRepository.updateIndexDataMA120_MA240ById(indexCodeData);
-//				}
-//			}
-//
-//
-//			if(days4His==0){
-//				previousDaysMa20 = indexCodeData.getMa20();
-//			}else{
-//				if(previousDaysMa20>=indexCodeData.getMa20() ){
-////					previousDaysMa20 = indexCodeData.getMa20();
-//					passIndex = true;
-//					break;
-//				}else{
-//					break;
-//				}
-//			}
-//			days4His++;
-//		}
-//		return passIndex;
-//	}
-//
-//	private boolean isIndexData4Ma5(String code, String endDateStr)throws Exception{
-//		boolean passIndex = false;
-//		String newStartDate = helper.getStartDateStr360DaysBefore(endDateStr); // 要当天
-//
-//		List<indexCodeData> indexCodeDataList  = indexCodeDataRepository.findIndexData(code, newStartDate, endDateStr);
-//
-//		int days4His = 0;
-//		double previousDaysMa240 = 0.0;
-//		double previousDaysMa5 = 0.0;
-//		for(indexCodeData indexCodeData:indexCodeDataList){
-//
-//			boolean isNeedUpdate = false;
-//
-//			String newEndDateStr = indexCodeData.getTrade_date();
-////			String newEndDateStr = dateUtils.dateToStr(newEndDate);
-//
-//			if(indexCodeData.getMa5()==0.0){
-//				String newStartDateStr = helper.getStartDateStr360DaysBefore(newEndDateStr); // 要当天
-//				List<indexCodeData> newResultList2Days  = indexCodeDataRepository.findIndexData(code, newStartDateStr, newEndDateStr);
-//
-//				if(indexCodeData.getMa5()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 5);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa5(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa10()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 10);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa10(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa20()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 20);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa20(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa30()==0.0){
-//					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 30);
-//					BigDecimal b60 = new BigDecimal(day1MA30);
-//					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa30(day1MA30);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa60()==0.0){
-//					double day1MA60 = helper.computeMA30_MA60Index(newResultList2Days, 60);
-//					BigDecimal b60 = new BigDecimal(day1MA60);
-//					day1MA60 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa60(day1MA60);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa120()==0.0){
-//					double day1MA120 = helper.computeMA30_MA60Index(newResultList2Days, 120);
-//					BigDecimal b120 = new BigDecimal(day1MA120);
-//					day1MA120 = b120.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa120(day1MA120);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(indexCodeData.getMa240()==0.0){
-//					double day1MA250 = helper.computeMA30_MA60Index(newResultList2Days, 250);
-//					BigDecimal b250 = new BigDecimal(day1MA250);
-//					day1MA250 = b250.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-//					indexCodeData.setMa240(day1MA250);
-//					isNeedUpdate = true;
-//				}
-//
-//				if(isNeedUpdate){
-//					indexCodeDataRepository.updateIndexDataMA120_MA240ById(indexCodeData);
-//				}
-//			}
-//
-//
-//			if(days4His==0){
-//				previousDaysMa5 = indexCodeData.getMa5();
-//			}else{
-//				if(previousDaysMa5>=indexCodeData.getMa5() ){
-////					previousDaysMa20 = indexCodeData.getMa20();
-//					passIndex = true;
-//					break;
-//				}else{
-//					break;
-//				}
-//			}
-//			days4His++;
-//		}
-//		return passIndex;
-//	}
+	private boolean isIndexData(String code, String endDateStr)throws Exception{
+		boolean passIndex = false;
+		String newStartDate = helper.getStartDateStr360DaysBefore(endDateStr); // 要当天
+
+		List<IndexCodeData> indexCodeDataList  = indexCodeDataRepository.findIndexData(code, newStartDate, endDateStr);
+
+		int days4His = 0;
+		double previousDaysMa240 = 0.0;
+		double previousDaysMa20 = 0.0;
+		for(IndexCodeData indexCodeData:indexCodeDataList){
+
+			boolean isNeedUpdate = false;
+
+			String newEndDateStr = indexCodeData.getTrade_date();
+//			String newEndDateStr = dateUtils.dateToStr(newEndDate);
+
+			if(indexCodeData.getMa5()==0.0){
+				String newStartDateStr = helper.getStartDateStr360DaysBefore(newEndDateStr); // 要当天
+				List<IndexCodeData> newResultList2Days  = indexCodeDataRepository.findIndexData(code, newStartDateStr, newEndDateStr);
+
+				if(indexCodeData.getMa5()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 5);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa5(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa10()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 10);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa10(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa20()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 20);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa20(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa30()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 30);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa30(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa60()==0.0){
+					double day1MA60 = helper.computeMA30_MA60Index(newResultList2Days, 60);
+					BigDecimal b60 = new BigDecimal(day1MA60);
+					day1MA60 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa60(day1MA60);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa120()==0.0){
+					double day1MA120 = helper.computeMA30_MA60Index(newResultList2Days, 120);
+					BigDecimal b120 = new BigDecimal(day1MA120);
+					day1MA120 = b120.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa120(day1MA120);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa240()==0.0){
+					double day1MA250 = helper.computeMA30_MA60Index(newResultList2Days, 250);
+					BigDecimal b250 = new BigDecimal(day1MA250);
+					day1MA250 = b250.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa240(day1MA250);
+					isNeedUpdate = true;
+				}
+
+				if(isNeedUpdate){
+					indexCodeDataRepository.updateIndexDataMA120_MA240ById(indexCodeData);
+				}
+			}
+
+
+			if(days4His==0){
+				previousDaysMa20 = indexCodeData.getMa20();
+			}else{
+				if(previousDaysMa20>=indexCodeData.getMa20() ){
+//					previousDaysMa20 = indexCodeData.getMa20();
+					passIndex = true;
+					break;
+				}else{
+					break;
+				}
+			}
+			days4His++;
+		}
+		return passIndex;
+	}
+
+	private boolean isIndexData4Ma5(String code, String endDateStr)throws Exception{
+		boolean passIndex = false;
+		String newStartDate = helper.getStartDateStr360DaysBefore(endDateStr); // 要当天
+
+		List<IndexCodeData> indexCodeDataList  = indexCodeDataRepository.findIndexData(code, newStartDate, endDateStr);
+
+		int days4His = 0;
+		double previousDaysMa240 = 0.0;
+		double previousDaysMa5 = 0.0;
+		for(IndexCodeData indexCodeData:indexCodeDataList){
+
+			boolean isNeedUpdate = false;
+
+			String newEndDateStr = indexCodeData.getTrade_date();
+//			String newEndDateStr = dateUtils.dateToStr(newEndDate);
+
+			if(indexCodeData.getMa5()==0.0){
+				String newStartDateStr = helper.getStartDateStr360DaysBefore(newEndDateStr); // 要当天
+				List<IndexCodeData> newResultList2Days  = indexCodeDataRepository.findIndexData(code, newStartDateStr, newEndDateStr);
+
+				if(indexCodeData.getMa5()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 5);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa5(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa10()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 10);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa10(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa20()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 20);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa20(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa30()==0.0){
+					double day1MA30 = helper.computeMA30_MA60Index(newResultList2Days, 30);
+					BigDecimal b60 = new BigDecimal(day1MA30);
+					day1MA30 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa30(day1MA30);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa60()==0.0){
+					double day1MA60 = helper.computeMA30_MA60Index(newResultList2Days, 60);
+					BigDecimal b60 = new BigDecimal(day1MA60);
+					day1MA60 = b60.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa60(day1MA60);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa120()==0.0){
+					double day1MA120 = helper.computeMA30_MA60Index(newResultList2Days, 120);
+					BigDecimal b120 = new BigDecimal(day1MA120);
+					day1MA120 = b120.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa120(day1MA120);
+					isNeedUpdate = true;
+				}
+
+				if(indexCodeData.getMa240()==0.0){
+					double day1MA250 = helper.computeMA30_MA60Index(newResultList2Days, 250);
+					BigDecimal b250 = new BigDecimal(day1MA250);
+					day1MA250 = b250.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+					indexCodeData.setMa240(day1MA250);
+					isNeedUpdate = true;
+				}
+
+				if(isNeedUpdate){
+					indexCodeDataRepository.updateIndexDataMA120_MA240ById(indexCodeData);
+				}
+			}
+
+
+			if(days4His==0){
+				previousDaysMa5 = indexCodeData.getMa5();
+			}else{
+				if(previousDaysMa5>=indexCodeData.getMa5() ){
+//					previousDaysMa20 = indexCodeData.getMa20();
+					passIndex = true;
+					break;
+				}else{
+					break;
+				}
+			}
+			days4His++;
+		}
+		return passIndex;
+	}
 	
 	
 }

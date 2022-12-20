@@ -54,7 +54,7 @@ public class Monitor_888888 {
 	private DailyBasicProRepository dailyBasicProRepository;
 
 	@Autowired
-	private longTouIndexProRepository longTouIndexProRepository;
+	private LongTouIndexProRepository longTouIndexProRepository;
 
 	@Autowired
 	private Helper helper;

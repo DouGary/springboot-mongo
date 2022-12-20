@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import com.dc.dal.StockCodeRepository;
 import com.dc.model.HistorytradeInfo;
+import com.dc.model.IndexCodeData;
 import com.dc.model.StockCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -817,6 +818,39 @@ public class Helper {
 		String dateStr = format.format(now.getTime());
 //		System.out.println(dateStr);
 		return dateStr;
+	}
+
+	public double computeMA30_MA60Index(List<IndexCodeData> stockList, int days)throws Exception
+	{
+		double maSUM =0.0;
+		int i=0;
+		int k = 0;
+		for (IndexCodeData result : stockList) {
+//			if(k==0){
+//				k++;
+//				continue;
+//			}
+
+			if(i==days)
+			{
+				break;
+			}
+//			if(result()!=null && result.getCLOSE().indexOf(".")>0 && !result.getCLOSE().equals("0.0"))
+//			{
+
+			maSUM = maSUM+ result.getClose();
+			i++;
+			k++;
+//			}
+
+		}
+
+//		if(i<days)
+//		{
+//			days = i;
+//		}
+
+		return maSUM/i;
 	}
 
 }
