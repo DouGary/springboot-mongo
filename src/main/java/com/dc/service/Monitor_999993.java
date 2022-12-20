@@ -152,7 +152,6 @@ public class Monitor_999993 {
 
 		}
 
-
 //		scpool scpool = new scpool(result.getNAME(),result.getSYMBOL(), "8858",endDateStr,historytradeInfo.getTrade_date(),historytradeInfo.getOpen());
 //		scpoolRepository.save(scpool);
 
