@@ -231,6 +231,7 @@ public class Monitor_888887 {
 //				helper.sendEmail(resultMap.toString(),888887,endDateStr);
 //			}
 
+
 		} else {
 			System.out.println(">>>>>>>>>>>>>>>>>> result.size=0");
 		}
