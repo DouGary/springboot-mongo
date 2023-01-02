@@ -59,6 +59,10 @@ public class Monitor4ASC815_22_8888464 {
 				continue;
 			}
 
+			if(stockjjcgph.getSYMBOL().equals("600225")){
+				System.out.println("600225");
+			}
+
 			if(stockjjcgph!=null)
 			{
 				boolean PERCENTASC = true;
@@ -257,15 +261,15 @@ public class Monitor4ASC815_22_8888464 {
 						){
 
 						} else {
-							PERCENTASC = false;
-							break;
+//							PERCENTASC = false;
+//							break;
 						}
 
 
 
 						if(historytradeInfo.getClose()>historytradeInfo.getMa5() &&
-								historytradeInfo.getMa5()>historytradeInfo.getMa10()
-								&& historytradeInfo.getMa10()>historytradeInfo.getMa20()
+//								historytradeInfo.getMa5()>historytradeInfo.getMa10() &&
+								historytradeInfo.getMa10()>=historytradeInfo.getMa20()
 								&& historytradeInfo.getClose()>historytradeInfo.getMa30()
 								&& historytradeInfo.getClose()>historytradeInfo.getMa60()
 								&& historytradeInfo.getClose()>historytradeInfo.getMa120()
@@ -301,18 +305,18 @@ public class Monitor4ASC815_22_8888464 {
 						){
 							if(isAboveMa240){
 								if(historytradeInfo.getClose()>historytradeInfo.getMa240()){
-									PERCENTASC = false;
-									break;
+//									PERCENTASC = false;
+//									break;
 								}
 							} else {
-								PERCENTASC = false;
-								break;
+//								PERCENTASC = false;
+//								break;
 							}
 
 						}
 						pct_change_total += historytradeInfo.getP_change();
 
-						if(historytradeInfo.getPct_chg()>4.2 || historytradeInfo.getPct_chg()< -4.2 ){
+						if(historytradeInfo.getPct_chg()>4.7 || historytradeInfo.getPct_chg()< -4.7 ){
 							PERCENTASC = false;
 							break;
 						}
@@ -368,8 +372,8 @@ public class Monitor4ASC815_22_8888464 {
 
 
 							if(stkdj.getMacds()>macdslow){
-								PERCENTASC = false;
-								break;
+//								PERCENTASC = false;
+//								break;
 							} else  {
 								macdslow = stkdj.getMacds();
 							}

@@ -933,7 +933,7 @@ public class Helper2 {
 			{
 				break;
 			}
-			maSUM = maSUM+ result.getCLOSE();
+//			maSUM = maSUM+ result.getCLOSE();
 			i++;
 			k++;
 

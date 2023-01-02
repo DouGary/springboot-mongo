@@ -208,13 +208,13 @@ public class Monitor_888888 {
 			longTouIndexPro.setSell(sellList.size());
 			longTouIndexPro.setTrade_date(endDateStr);
 
-			longTouIndexProRepository.save(longTouIndexPro);
+//			longTouIndexProRepository.save(longTouIndexPro);
 
 //			System.out.println(resultMap.toString());
 
 //			if(!allScpoolStatus.equals("")){
 				// 发email
-				helper.sendEmail(endDateStr+"   buy:"+resultMap.size()+"   sell:"+sellList.size() +" <br> "+ resultMap.toString(),888888,endDateStr);
+//				helper.sendEmail(endDateStr+"   buy:"+resultMap.size()+"   sell:"+sellList.size() +" <br> "+ resultMap.toString(),888888,endDateStr);
 //			}
 
 		} else {

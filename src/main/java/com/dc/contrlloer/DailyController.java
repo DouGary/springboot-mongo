@@ -59,7 +59,12 @@ public class DailyController {
 	Monitor4ASC815_22_8888464 monitor4ASC815_22_8888464;
 
 	@Autowired
+	Monitor_88884641 monitor_88884641;
+
+	@Autowired
 	Monitor4ASC815_22_88781 monitor4ASC815_22_88781;
+
+
 
 	@Autowired
 	Monitor_888884 monitor_888884;
@@ -83,7 +88,7 @@ public class DailyController {
 
 
 	@Autowired
-	Monitor_999993 monitor_9999931;
+	Monitor_9999931 monitor_9999931;
 
 //	@Autowired
 //	Monitor4ASC815_22_9999931 monitor4ASC815_22_9999931;
@@ -119,14 +124,14 @@ public class DailyController {
 
 //			monitor4ASC815_22_30.getFinal("");
 
-			String endDateStr="";
-			Date dt = new Date();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			endDateStr=sdf.format(dt);
-			boolean isSendEmailEveryDay = false;
-//
-//			String endDateStr = "20221208";
-//			boolean isSendEmailEveryDay = true;
+//			String endDateStr="";
+//			Date dt = new Date();
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//			endDateStr=sdf.format(dt);
+//			boolean isSendEmailEveryDay = false;
+
+			String endDateStr = "20221203";
+			boolean isSendEmailEveryDay = true;
 //
 
 
@@ -156,98 +161,105 @@ public class DailyController {
 
 
 
-				this.longTermIndexRisk(nowStr,endDateStr);
-				this.shortTermIndexRisk(nowStr,endDateStr);
+//				this.longTermIndexRisk(nowStr,endDateStr);
+//				this.shortTermIndexRisk(nowStr,endDateStr);
 
 				// 突破 第一板
 				System.out.println("monitor4ASC815_22_8888464 and date="+endDateStr);
-				List<StockCode> Results8888464 = monitor4ASC815_22_8888464.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results8888464, 88884641, endDateStr);
-				}
+				List<StockCode> Results8888464old = monitor4ASC815_22_8888464.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results8888464old, 8888464, endDateStr);
+//				}
 
-				System.out.println("monitor4ASC815_22_8878 and date="+endDateStr);
-				List<StockCode> Results8878 = monitor_8878.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results8878, 8878, endDateStr);
-				}
-
-				//   只有量的约束，底部放量
-				System.out.println("monitor4ASC815_22_88781 and date="+endDateStr);
-				List<StockCode> Results88781 = monitor4ASC815_22_88781.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results88781, 88781, endDateStr);
-				}
-
-				// vol/v_ma5>2
-				System.out.println("monitor4ASC815_22_881 and date="+endDateStr);
-				List<StockCode> Results881 = monitor4ASC815_22_881.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results881, 881, endDateStr);
-				}
-
-				// 底部 第一板 反包
-				System.out.println("monitor4ASC815_22_8888884 and date="+endDateStr);
-				List<StockCode> Results888884 = monitor_888884.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results888884, 888884, endDateStr);
-				}
-
-				//				// 底部 第一板 反包
-				System.out.println("monitor4ASC815_22_88884 and date="+endDateStr);
-				List<StockCode> Results88884 = monitor4ASC815_22_88884.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results88884, 88884, endDateStr);
-				}
-
-				// 不中断涨停板统计
-				System.out.println("monitor4ASC815_22_888887 and date="+endDateStr);
-				List<StockCode> Results888887 = monitor_888887.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results888887, 888887, endDateStr);
-				}
-
-				System.out.println("monitor4ASC815_22_888888 and date="+endDateStr);
-				List<StockCode> Results888888 = monitor_888888.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results888888, 888888, endDateStr);
-				}
-
-				//  对所有策略的观察，回打中轨
-				System.out.println("monitor4ASC815_22_8848 and date="+endDateStr);
-				List<StockCode> Results8848 = monitor_8848.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results8848, 8848, endDateStr);
-				}
-
-				//  对所有策略的观察，回打中轨
-				System.out.println("monitor4ASC815_22_8858 and date="+endDateStr);
-				List<StockCode> Results8858 = monitor_8858.getFinal(endDateStr);
-				if(nowStr.equals(endDateStr)){
-					sendEmailWithDate(Results8858, 8858, endDateStr);
-				}
-
-				// 99999 - 跟踪策略
-				System.out.println("monitor4ASC815_22_99999 and date="+endDateStr);
-				List<StockCode> Results99999 = monitor_99999.getFinal(endDateStr);
-				// 99999 - 跟踪策略 缩量三分之一
-				System.out.println("monitor4ASC815_22_999991 and date="+endDateStr);
-				List<StockCode> Results999991 = monitor_999991.getFinal(endDateStr);
-				// 排序
-				System.out.println("monitor4A SC815_22_999992 and date="+endDateStr);
-				List<StockCode> Results999992 = monitor_999992.getFinal(endDateStr);
-				// 上升趋势
-				System.out.println("monitor4A SC815_22_999993 and date="+endDateStr);
-				List<StockCode> Results999993 = monitor_999993.getFinal(endDateStr);
-				// 上升趋势
-				System.out.println("monitor4A SC815_22_9999931 and date="+endDateStr);
-				List<StockCode> Results9999931 = monitor_9999931.getFinal(endDateStr);
-				// 上升趋势且回调到中轨附近
-				System.out.println("monitor4A SC815_22_999994 and date="+endDateStr);
-				List<StockCode> Results999994 = monitor_999994.getFinal(endDateStr);
-				// 监控881，boll.mid重新递增
-				System.out.println("monitor4A SC815_22_99881 and date="+endDateStr);
-				List<StockCode> Results99881 = monitor_99881.getFinal(endDateStr);
+				// 突破 第一板
+//				System.out.println("monitor4ASC815_22_88884641 and date="+endDateStr);
+//				List<StockCode> Results8888464 = monitor_88884641.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results8888464, 88884641, endDateStr);
+//				}
+//
+//				System.out.println("monitor4ASC815_22_8878 and date="+endDateStr);
+//				List<StockCode> Results8878 = monitor_8878.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results8878, 8878, endDateStr);
+//				}
+//
+//				//   只有量的约束，底部放量
+//				System.out.println("monitor4ASC815_22_88781 and date="+endDateStr);
+//				List<StockCode> Results88781 = monitor4ASC815_22_88781.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results88781, 88781, endDateStr);
+//				}
+//
+//				// vol/v_ma5>2
+//				System.out.println("monitor4ASC815_22_881 and date="+endDateStr);
+//				List<StockCode> Results881 = monitor4ASC815_22_881.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results881, 881, endDateStr);
+//				}
+//
+//				// 底部 第一板 反包
+//				System.out.println("monitor4ASC815_22_8888884 and date="+endDateStr);
+//				List<StockCode> Results888884 = monitor_888884.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results888884, 888884, endDateStr);
+//				}
+//
+//				//				// 底部 第一板 反包
+//				System.out.println("monitor4ASC815_22_88884 and date="+endDateStr);
+//				List<StockCode> Results88884 = monitor4ASC815_22_88884.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results88884, 88884, endDateStr);
+//				}
+//
+//				// 不中断涨停板统计
+//				System.out.println("monitor4ASC815_22_888887 and date="+endDateStr);
+//				List<StockCode> Results888887 = monitor_888887.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results888887, 888887, endDateStr);
+//				}
+//
+//				System.out.println("monitor4ASC815_22_888888 and date="+endDateStr);
+//				List<StockCode> Results888888 = monitor_888888.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results888888, 888888, endDateStr);
+//				}
+//
+//				//  对所有策略的观察，回打中轨
+//				System.out.println("monitor4ASC815_22_8848 and date="+endDateStr);
+//				List<StockCode> Results8848 = monitor_8848.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results8848, 8848, endDateStr);
+//				}
+//
+//				//  对所有策略的观察，回打中轨
+//				System.out.println("monitor4ASC815_22_8858 and date="+endDateStr);
+//				List<StockCode> Results8858 = monitor_8858.getFinal(endDateStr);
+//				if(nowStr.equals(endDateStr)){
+//					sendEmailWithDate(Results8858, 8858, endDateStr);
+//				}
+//
+//				// 99999 - 跟踪策略
+//				System.out.println("monitor4ASC815_22_99999 and date="+endDateStr);
+//				List<StockCode> Results99999 = monitor_99999.getFinal(endDateStr);
+//				// 99999 - 跟踪策略 缩量三分之一
+//				System.out.println("monitor4ASC815_22_999991 and date="+endDateStr);
+//				List<StockCode> Results999991 = monitor_999991.getFinal(endDateStr);
+//				// 排序
+//				System.out.println("monitor4A SC815_22_999992 and date="+endDateStr);
+//				List<StockCode> Results999992 = monitor_999992.getFinal(endDateStr);
+//				// 上升趋势
+//				System.out.println("monitor4A SC815_22_999993 and date="+endDateStr);
+//				List<StockCode> Results999993 = monitor_999993.getFinal(endDateStr);
+//				// 上升趋势
+//				System.out.println("monitor4A SC815_22_9999931 and date="+endDateStr);
+//				List<StockCode> Results9999931 = monitor_9999931.getFinal(endDateStr);
+//				// 上升趋势且回调到中轨附近
+//				System.out.println("monitor4A SC815_22_999994 and date="+endDateStr);
+//				List<StockCode> Results999994 = monitor_999994.getFinal(endDateStr);
+//				// 监控881，boll.mid重新递增
+//				System.out.println("monitor4A SC815_22_99881 and date="+endDateStr);
+//				List<StockCode> Results99881 = monitor_99881.getFinal(endDateStr);
 
 
 
@@ -916,7 +928,7 @@ public class DailyController {
 //				nowStr = endDateStr;
 		    	Date date = format.parse(endDateStr);
 
-//				Date date2 = format.parse("20220721");
+				Date date2 = format.parse("20221020");
 				Date now  = new Date();
 		    	
 				if(date.getTime()>=now.getTime()){

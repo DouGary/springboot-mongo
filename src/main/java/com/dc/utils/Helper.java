@@ -722,7 +722,7 @@ public class Helper {
 		Date date = format.parse(endDateStr);
 		// 对 calendar 设置为 date 所定的日期
 		now.setTime(date);
-		int days = -20;
+		int days = -30;
 		now.add(Calendar.DAY_OF_MONTH, days);
 		String dateStr = format.format(now.getTime());
 		return dateStr;

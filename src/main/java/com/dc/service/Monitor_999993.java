@@ -59,7 +59,7 @@ public class Monitor_999993 {
         List<String> monitors = new ArrayList<>();
 		// 88884，888884，8828，881，8818，8878，88781
 //		monitors.add("888846");
-		monitors.add("8888461");
+		monitors.add("8888464");
 //		monitors.add("8888462");
 //		monitors.add("8888463");
 		monitors.add("88884641");
@@ -158,7 +158,7 @@ public class Monitor_999993 {
 
 
 		// 发email
-		helper.sendEmail(allScpoolStatus.toString(),999993,endDateStr);
+//		helper.sendEmail(allScpoolStatus.toString(),999993,endDateStr);
 
 //		System.out.println(">>>>>>>>>>>>>>>>>> result.size="+Results.size());
 //		for (stockCode result : Results) {

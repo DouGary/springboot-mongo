@@ -57,13 +57,13 @@ public class Monitor_9999931 {
         List<String> monitors = new ArrayList<>();
 		// 88884，888884，8828，881，8818，8878，88781
 //		monitors.add("888846");
-		monitors.add("8888461");
+		monitors.add("88884641");
 //		monitors.add("8888462");
 //		monitors.add("8888463");
 		monitors.add("8888464");
 //		monitors.add("8888465");
-//		monitors.add("88884");
-//		monitors.add("888884");
+		monitors.add("88884");
+		monitors.add("888884");
 //		monitors.add("88");
 		monitors.add("881");
 //		monitors.add("8818");
@@ -73,7 +73,7 @@ public class Monitor_9999931 {
 //		monitors.add("889");
 //		monitors.add("8898");
 //		monitors.add("8868");
-//		monitors.add("8878");
+		monitors.add("8878");
 		monitors.add("88781");
 		List<Scpool> scLst = scpoolRepository.findAllScpoolGteEndDateStrAndSellAllOut(startDate100DaysBeforeStr,endDateStr,true,monitors,1);
 

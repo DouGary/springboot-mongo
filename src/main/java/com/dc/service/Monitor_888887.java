@@ -228,7 +228,7 @@ public class Monitor_888887 {
 
 //			if(!allScpoolStatus.equals("")){
 				// 发email
-				helper.sendEmail(resultMap.toString(),888887,endDateStr);
+//				helper.sendEmail(resultMap.toString(),888887,endDateStr);
 //			}
 
 		} else {

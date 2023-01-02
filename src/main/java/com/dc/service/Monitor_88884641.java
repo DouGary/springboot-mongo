@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.text.SimpleDateFormat;
 
 @Component
-public class Monitor_8888464 {
+public class Monitor_88884641 {
 	@Autowired
 	private StockCodeRepository stockCodeRepository;
 
@@ -50,7 +50,7 @@ public class Monitor_8888464 {
 	@Autowired
 	private Helper helper;
 	
-	Logger logger = LogManager.getLogger(Monitor_8888464.class);
+	Logger logger = LogManager.getLogger(Monitor_88884641.class);
 
 	public List<StockCode> getFinal(String endDateStr) throws Exception
 	{
@@ -109,8 +109,8 @@ public class Monitor_8888464 {
 //				System.out.println("300176");
 //			}
 //
-			if(stockjjcgph.getSYMBOL().equals("601858")){
-				System.out.println("601858");
+			if(stockjjcgph.getSYMBOL().equals("600225")){
+				System.out.println("600225");
 			}
 
 //			if(endDateStr.equals("2017-10-16") && result.getSYMBOL().equals("300176")){
