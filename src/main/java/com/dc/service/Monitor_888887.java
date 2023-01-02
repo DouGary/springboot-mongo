@@ -226,7 +226,6 @@ public class Monitor_888887 {
 
 			System.out.println(resultMap.toString());
 
-
 //			if(!allScpoolStatus.equals("")){
 				// 发email
 //				helper.sendEmail(resultMap.toString(),888887,endDateStr);
