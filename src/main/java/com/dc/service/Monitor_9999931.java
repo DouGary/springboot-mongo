@@ -53,7 +53,7 @@ public class Monitor_9999931 {
 
 		SimpleDateFormat format =  new SimpleDateFormat( "yyyyMMdd");
 
-		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-100); // 要当天
+		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-350); // 要当天
         List<String> monitors = new ArrayList<>();
 		// 88884，888884，8828，881，8818，8878，88781
 //		monitors.add("888846");
@@ -163,7 +163,7 @@ public class Monitor_9999931 {
 
 
 		// 发email
-		helper.sendEmail(allScpoolStatus.toString(),9999931,endDateStr);
+//		helper.sendEmail(allScpoolStatus.toString(),9999931,endDateStr);
 
 //		System.out.println(">>>>>>>>>>>>>>>>>> result.size="+Results.size());
 //		for (stockCode result : Results) {

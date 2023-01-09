@@ -722,7 +722,22 @@ public class Helper {
 		Date date = format.parse(endDateStr);
 		// 对 calendar 设置为 date 所定的日期
 		now.setTime(date);
-		int days = -30;
+		int days = -20;
+		now.add(Calendar.DAY_OF_MONTH, days);
+		String dateStr = format.format(now.getTime());
+		return dateStr;
+	}
+
+	public String get60DaysBefore(String endDateStr) throws ParseException
+	{
+		SimpleDateFormat format =  new SimpleDateFormat( "yyyyMMdd");
+		// 创建 Calendar 对象
+		Calendar now = Calendar.getInstance();
+		// 指定一个日期
+		Date date = format.parse(endDateStr);
+		// 对 calendar 设置为 date 所定的日期
+		now.setTime(date);
+		int days = -60;
 		now.add(Calendar.DAY_OF_MONTH, days);
 		String dateStr = format.format(now.getTime());
 		return dateStr;

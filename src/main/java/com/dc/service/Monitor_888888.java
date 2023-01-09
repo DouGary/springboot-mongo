@@ -79,9 +79,9 @@ public class Monitor_888888 {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
-		String startDate100DaysBeforeStr = helper.get20DaysBefore(endDateStr); // 要当天
+		String startDate100DaysBeforeStr = helper.get60DaysBefore(endDateStr); // 要当天
 
-
+        Map nameMap = new HashMap();
 		for (StockCode stockjjcgph : sCode) {
 			boolean is300 = false;
 			int sore = 0;
@@ -100,6 +100,7 @@ public class Monitor_888888 {
 			if (stockjjcgph.getSYMBOL().equals("001270")) {
 				System.out.println("001270");
 			}
+
 			if (stockjjcgph != null) {
 				boolean PERCENTASC = true;
 				String codePrefix = stockjjcgph.getSYMBOL().substring(0, 3);
@@ -193,7 +194,7 @@ public class Monitor_888888 {
 		System.out.println(resultMap.toString());
 
 		if(resultMap.size()>0){
-			resultMap = helper.hashMapSort(resultMap);
+//			resultMap = helper.hashMapSort(resultMap);
 
 			LongTouIndexPro longTouIndexPro = new LongTouIndexPro();
 
@@ -202,19 +203,32 @@ public class Monitor_888888 {
 				index = entry.getValue();
 				break;
 			}
+
+			for(Map.Entry<String,Integer> entry : resultMap.entrySet()) {
+				if(entry.getValue()>=3) {
+//					String endDate100DaysAfterStr = helper.getStartDateStr360DaysAfter(endDateStr); // 要当天
+//					List<HistorytradeInfo> resultList2Days = historytradeInfoRepository.findHistorytradeInfo2(entry.getKey(), endDateStr, endDate100DaysAfterStr);
+//					if (resultList2Days != null && resultList2Days.size() > 0) {
+//						HistorytradeInfo historytradeInfo = resultList2Days.get(0);
+						Scpool scpool = new Scpool("", entry.getKey(), "888888", endDateStr, endDateStr, 0.0);
+					    scpoolRepository.save(scpool);
+//					}
+				}
+			}
+
 			longTouIndexPro.setIndex(index);
 			longTouIndexPro.setIndexContent(resultMap.toString());
 			longTouIndexPro.setBuy(resultMap.size());
 			longTouIndexPro.setSell(sellList.size());
 			longTouIndexPro.setTrade_date(endDateStr);
 
-//			longTouIndexProRepository.save(longTouIndexPro);
+			longTouIndexProRepository.save(longTouIndexPro);
 
 //			System.out.println(resultMap.toString());
 
 //			if(!allScpoolStatus.equals("")){
 				// 发email
-//				helper.sendEmail(endDateStr+"   buy:"+resultMap.size()+"   sell:"+sellList.size() +" <br> "+ resultMap.toString(),888888,endDateStr);
+				helper.sendEmail(endDateStr+"   buy:"+resultMap.size()+"   sell:"+sellList.size() +" <br> "+ resultMap.toString(),888888,endDateStr);
 //			}
 
 		} else {

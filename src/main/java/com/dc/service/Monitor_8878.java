@@ -108,8 +108,8 @@ public class Monitor_8878 {
 //				System.out.println("300176");
 //			}
 //				
-			if(stockbasics.getSYMBOL().equals("600559")){
-				System.out.println("600559");
+			if(stockbasics.getSYMBOL().equals("300071")){
+				System.out.println("300071");
 			}
 			
 //			if(endDateStr.equals("2017-10-16") && result.getSYMBOL().equals("300176")){
@@ -286,9 +286,15 @@ public class Monitor_8878 {
 							PERCENTASC = false;
 							break;
 						}
-						if(historytradeInfo.getVol()<historytradeInfo.getV_ma5()*2 || historytradeInfo.getVol()>historytradeInfo.getV_ma5()*3){
+						double v_ma5_2 = historytradeInfo.getV_ma5()*2;
+						double v_ma5_3 = historytradeInfo.getV_ma5()*3.1;
+						if(historytradeInfo.getVol()<v_ma5_2){
 							PERCENTASC = false;
 						}
+						if(historytradeInfo.getVol()>v_ma5_3){
+							PERCENTASC = false;
+						}
+
 					}else{
 						if(historytradeInfo.getVol()>historytradeInfo.getV_ma5()*1.8){
 							PERCENTASC = false;

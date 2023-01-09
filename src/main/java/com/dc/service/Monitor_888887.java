@@ -73,7 +73,7 @@ public class Monitor_888887 {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 
-		String startDate100DaysBeforeStr = helper.get20DaysBefore(endDateStr); // 要当天
+		String startDate100DaysBeforeStr = helper.get60DaysBefore(endDateStr); // 要当天
 
 
 		for (StockCode stockjjcgph : sCode) {
@@ -91,8 +91,8 @@ public class Monitor_888887 {
 			if (codeStr.equals("900") || codeStr.equals("200")) {
 				continue;
 			}
-			if (stockjjcgph.getSYMBOL().equals("001270")) {
-				System.out.println("001270");
+			if (stockjjcgph.getSYMBOL().equals("000715")) {
+				System.out.println("000715");
 			}
 			if (stockjjcgph != null) {
 				boolean PERCENTASC = true;
@@ -151,8 +151,7 @@ public class Monitor_888887 {
                 boolean isContinue = false;
 				for (HistorytradeInfo historytradeInfo : resultList2Days) {
 
-
-					if (days4His == 15) {
+					if (days4His == 45) {
 						isContinue = true;
 						break;
 					}
@@ -162,15 +161,19 @@ public class Monitor_888887 {
 						if(historytradeInfo.getPct_chg()>18){
 							ban++;
 						} else {
-							isContinue = true;
-							break;
+							if(days4His==0){
+								isContinue = true;
+								break;
+							}
 						}
 					} else {
 						if(historytradeInfo.getPct_chg()>9.8){
 							ban++;
 						} else {
-							isContinue = true;
-							break;
+							if(days4His==0){
+								isContinue = true;
+								break;
+							}
 						}
 					}
 					days4His++;
@@ -228,7 +231,7 @@ public class Monitor_888887 {
 
 //			if(!allScpoolStatus.equals("")){
 				// 发email
-//				helper.sendEmail(resultMap.toString(),888887,endDateStr);
+				helper.sendEmail(resultMap.toString(),888887,endDateStr);
 //			}
 
 

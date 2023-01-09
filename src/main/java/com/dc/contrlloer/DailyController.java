@@ -129,8 +129,8 @@ public class DailyController {
 //			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 //			endDateStr=sdf.format(dt);
 //			boolean isSendEmailEveryDay = false;
-
-			String endDateStr = "20221203";
+//
+			String endDateStr = "20220628";
 			boolean isSendEmailEveryDay = true;
 //
 
@@ -163,10 +163,10 @@ public class DailyController {
 
 //				this.longTermIndexRisk(nowStr,endDateStr);
 //				this.shortTermIndexRisk(nowStr,endDateStr);
-
-				// 突破 第一板
-				System.out.println("monitor4ASC815_22_8888464 and date="+endDateStr);
-				List<StockCode> Results8888464old = monitor4ASC815_22_8888464.getFinal(endDateStr);
+//
+//				// 突破 第一板
+//				System.out.println("monitor4ASC815_22_8888464 and date="+endDateStr);
+//				List<StockCode> Results8888464old = monitor4ASC815_22_8888464.getFinal(endDateStr);
 //				if(nowStr.equals(endDateStr)){
 //					sendEmailWithDate(Results8888464old, 8888464, endDateStr);
 //				}
@@ -178,26 +178,26 @@ public class DailyController {
 //					sendEmailWithDate(Results8888464, 88884641, endDateStr);
 //				}
 //
-//				System.out.println("monitor4ASC815_22_8878 and date="+endDateStr);
-//				List<StockCode> Results8878 = monitor_8878.getFinal(endDateStr);
+				System.out.println("monitor4ASC815_22_8878 and date="+endDateStr);
+				List<StockCode> Results8878 = monitor_8878.getFinal(endDateStr);
 //				if(nowStr.equals(endDateStr)){
 //					sendEmailWithDate(Results8878, 8878, endDateStr);
 //				}
-//
-//				//   只有量的约束，底部放量
+
+				//   只有量的约束，底部放量
 //				System.out.println("monitor4ASC815_22_88781 and date="+endDateStr);
 //				List<StockCode> Results88781 = monitor4ASC815_22_88781.getFinal(endDateStr);
 //				if(nowStr.equals(endDateStr)){
 //					sendEmailWithDate(Results88781, 88781, endDateStr);
 //				}
-//
-//				// vol/v_ma5>2
-//				System.out.println("monitor4ASC815_22_881 and date="+endDateStr);
-//				List<StockCode> Results881 = monitor4ASC815_22_881.getFinal(endDateStr);
+
+				// vol/v_ma5>2
+				System.out.println("monitor4ASC815_22_881 and date="+endDateStr);
+				List<StockCode> Results881 = monitor4ASC815_22_881.getFinal(endDateStr);
 //				if(nowStr.equals(endDateStr)){
 //					sendEmailWithDate(Results881, 881, endDateStr);
 //				}
-//
+
 //				// 底部 第一板 反包
 //				System.out.println("monitor4ASC815_22_8888884 and date="+endDateStr);
 //				List<StockCode> Results888884 = monitor_888884.getFinal(endDateStr);
@@ -238,8 +238,8 @@ public class DailyController {
 //				if(nowStr.equals(endDateStr)){
 //					sendEmailWithDate(Results8858, 8858, endDateStr);
 //				}
-//
-//				// 99999 - 跟踪策略
+
+				// 99999 - 跟踪策略
 //				System.out.println("monitor4ASC815_22_99999 and date="+endDateStr);
 //				List<StockCode> Results99999 = monitor_99999.getFinal(endDateStr);
 //				// 99999 - 跟踪策略 缩量三分之一
@@ -928,7 +928,7 @@ public class DailyController {
 //				nowStr = endDateStr;
 		    	Date date = format.parse(endDateStr);
 
-				Date date2 = format.parse("20221020");
+				Date date2 = format.parse("20221216");
 				Date now  = new Date();
 		    	
 				if(date.getTime()>=now.getTime()){
