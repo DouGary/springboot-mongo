@@ -124,14 +124,14 @@ public class DailyController {
 
 //			monitor4ASC815_22_30.getFinal("");
 
-//			String endDateStr="";
-//			Date dt = new Date();
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-//			endDateStr=sdf.format(dt);
-//			boolean isSendEmailEveryDay = false;
-//
-			String endDateStr = "20220628";
-			boolean isSendEmailEveryDay = true;
+			String endDateStr="";
+			Date dt = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			endDateStr=sdf.format(dt);
+			boolean isSendEmailEveryDay = false;
+
+//			String endDateStr = "20220628";
+//			boolean isSendEmailEveryDay = true;
 //
 
 
@@ -180,23 +180,23 @@ public class DailyController {
 //
 				System.out.println("monitor4ASC815_22_8878 and date="+endDateStr);
 				List<StockCode> Results8878 = monitor_8878.getFinal(endDateStr);
-//				if(nowStr.equals(endDateStr)){
-//					sendEmailWithDate(Results8878, 8878, endDateStr);
-//				}
+				if(nowStr.equals(endDateStr)){
+					sendEmailWithDate(Results8878, 8878, endDateStr);
+				}
 
 				//   只有量的约束，底部放量
-//				System.out.println("monitor4ASC815_22_88781 and date="+endDateStr);
-//				List<StockCode> Results88781 = monitor4ASC815_22_88781.getFinal(endDateStr);
-//				if(nowStr.equals(endDateStr)){
-//					sendEmailWithDate(Results88781, 88781, endDateStr);
-//				}
+				System.out.println("monitor4ASC815_22_88781 and date="+endDateStr);
+				List<StockCode> Results88781 = monitor4ASC815_22_88781.getFinal(endDateStr);
+				if(nowStr.equals(endDateStr)){
+					sendEmailWithDate(Results88781, 88781, endDateStr);
+				}
 
 				// vol/v_ma5>2
 				System.out.println("monitor4ASC815_22_881 and date="+endDateStr);
 				List<StockCode> Results881 = monitor4ASC815_22_881.getFinal(endDateStr);
-//				if(nowStr.equals(endDateStr)){
-//					sendEmailWithDate(Results881, 881, endDateStr);
-//				}
+				if(nowStr.equals(endDateStr)){
+					sendEmailWithDate(Results881, 881, endDateStr);
+				}
 
 //				// 底部 第一板 反包
 //				System.out.println("monitor4ASC815_22_8888884 and date="+endDateStr);
