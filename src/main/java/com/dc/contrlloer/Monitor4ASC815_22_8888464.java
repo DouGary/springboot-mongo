@@ -59,8 +59,8 @@ public class Monitor4ASC815_22_8888464 {
 				continue;
 			}
 
-			if(stockjjcgph.getSYMBOL().equals("600225")){
-				System.out.println("600225");
+			if(stockjjcgph.getSYMBOL().equals("002043")){
+				System.out.println("002043");
 			}
 
 			if(stockjjcgph!=null)
@@ -69,6 +69,9 @@ public class Monitor4ASC815_22_8888464 {
 
 				// 1 天 当天
 				List<HistorytradeInfo> resultList2Days  = historytradeInfoRepository.findHistorytradeInfoByDesc4MA30_MA60(stockjjcgph.getSYMBOL(), startDate100DaysBeforeStr, endDateStr);
+//				if(!resultList2Days.get(0).getTrade_date().equals(endDateStr)){
+//					continue;
+//				}
 				HistorytradeInfo historytradeInfoHighestDay =  helper.computeHighestHighPriceClose4kdj4Obj(resultList2Days,60);
 				if(historytradeInfoHighestDay!=null&& historytradeInfoHighestDay.getTrade_date()!=null) {
 					if(!historytradeInfoHighestDay.getTrade_date().equals(endDateStr)){
@@ -79,7 +82,7 @@ public class Monitor4ASC815_22_8888464 {
 
 				if(historytradeInfoHighestVolDay!=null&& historytradeInfoHighestVolDay.getTrade_date()!=null) {
 					if (historytradeInfoHighestVolDay.getTrade_date().equals(endDateStr)) {
-//						continue;
+						continue;
 					}
 				}
 
@@ -244,7 +247,8 @@ public class Monitor4ASC815_22_8888464 {
 								break;
 							}
 						} else {
-							if(rat1 >10 || rat2 >10 ){
+							if(rat1 > 10 || rat2 > 10 ){
+//							if(rat1 >24.06 || rat2 > 15.73 ){
 								PERCENTASC = false;
 								break;
 							}
@@ -261,14 +265,21 @@ public class Monitor4ASC815_22_8888464 {
 						){
 
 						} else {
-//							PERCENTASC = false;
-//							break;
+							if (historytradeInfo.getClose()>historytradeInfo.getMa240()
+									&& historytradeInfo.getClose()>historytradeInfo.getMa60()
+									&& historytradeInfo.getClose()>historytradeInfo.getMa120()
+							) {
+
+							}else {
+								PERCENTASC = false;
+								break;
+							}
 						}
 
 
 
 						if(historytradeInfo.getClose()>historytradeInfo.getMa5() &&
-//								historytradeInfo.getMa5()>historytradeInfo.getMa10() &&
+								historytradeInfo.getMa5()>historytradeInfo.getMa10() &&
 								historytradeInfo.getMa10()>=historytradeInfo.getMa20()
 								&& historytradeInfo.getClose()>historytradeInfo.getMa30()
 								&& historytradeInfo.getClose()>historytradeInfo.getMa60()
@@ -305,12 +316,12 @@ public class Monitor4ASC815_22_8888464 {
 						){
 							if(isAboveMa240){
 								if(historytradeInfo.getClose()>historytradeInfo.getMa240()){
-//									PERCENTASC = false;
-//									break;
+									PERCENTASC = false;
+									break;
 								}
 							} else {
-//								PERCENTASC = false;
-//								break;
+								PERCENTASC = false;
+								break;
 							}
 
 						}
@@ -370,10 +381,10 @@ public class Monitor4ASC815_22_8888464 {
 						if(days==1 || days==2){
 
 
-
-							if(stkdj.getMacds()>macdslow){
-//								PERCENTASC = false;
-//								break;
+                            double val = stkdj.getMacds()/macdslow;
+							if( val > 1.05333){
+								PERCENTASC = false;
+								break;
 							} else  {
 								macdslow = stkdj.getMacds();
 							}

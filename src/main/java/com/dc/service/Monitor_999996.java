@@ -1,9 +1,9 @@
 package com.dc.service;
 
+
 import com.dc.dal.*;
 import com.dc.model.*;
 import com.dc.utils.Helper;
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Component
-public class Monitor_9999931 {
+public class Monitor_999996 {
 	@Autowired
 	private StockCodeRepository stockCodeRepository;
 
@@ -44,7 +44,7 @@ public class Monitor_9999931 {
 	@Autowired
 	private Helper helper;
 	
-	Logger logger = LogManager.getLogger(Monitor_9999931.class);
+	Logger logger = LogManager.getLogger(Monitor_999996.class);
 
 	public List<StockCode> getFinal(String endDateStr) throws Exception
 	{
@@ -53,14 +53,14 @@ public class Monitor_9999931 {
 
 		SimpleDateFormat format =  new SimpleDateFormat( "yyyyMMdd");
 
-		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-100); // 要当天
+		String startDate100DaysBeforeStr = helper.getStartDateStr15daysBefore(endDateStr,-60); // 要当天
         List<String> monitors = new ArrayList<>();
 		// 88884，888884，8828，881，8818，8878，88781
 //		monitors.add("888846");
-		monitors.add("88884641");
+//		monitors.add("8888464");
 //		monitors.add("8888462");
 //		monitors.add("8888463");
-		monitors.add("8888464");
+//		monitors.add("88884641");
 //		monitors.add("8888465");
 //		monitors.add("88884");
 //		monitors.add("888884");
@@ -85,42 +85,32 @@ public class Monitor_9999931 {
 			// 1 天 当天
 			List<HistorytradeInfo> resultList2Days  = historytradeInfoRepository.findHistorytradeInfoByDesc4MA30_MA60(scpool.getCode(), scpool.getCreateTime(), endDateStr);
 
-			double previousMa20 = 0.0;
+			double previousMa5 = 0.0;
 			int days = 0;
 			boolean isASC = true;
 			for(HistorytradeInfo historytradeInfo : resultList2Days ){
-				if(days==1) break;
+				if(days==15) break;
 				if(days==0){
-					previousMa20 = historytradeInfo.getMa20();
-					if(historytradeInfo.getPct_chg()>9.8  ){
-						scpool.setProfit(historytradeInfo.getPct_chg());
-						if(scpool.getCreateTime().equals(endDateStr)){
-							isASC = false;
-							break;
-						}
+					if(historytradeInfo.getMa5() / historytradeInfo.getMa10() > 0.996){
+
 					}else {
 						isASC = false;
 						break;
 					}
-//					if(historytradeInfo.getLow()<historytradeInfo.getMa20()
-//							|| (historytradeInfo.getLow()/historytradeInfo.getMa20() >0.98 &&
-//							historytradeInfo.getLow()/historytradeInfo.getMa20() <1.02)){
-//						if(historytradeInfo.getClose()>historytradeInfo.getMa20()){
-//							scpool.setOriCreateTime("靠近或击穿中轨");
-//						}
-//					}
 				} else {
-//					if(previousMa20<historytradeInfo.getMa20()){
-//						isASC = false;
-//						 break;
-//					} else {
-//						previousMa20 = historytradeInfo.getMa20();
-//					}
+					if(historytradeInfo.getMa5() < historytradeInfo.getMa10()){
+
+					}else {
+						isASC = false;
+						break;
+					}
 				}
 				days++;
 			}
 			if(isASC){
-				ascList.add(scpool);
+				if(!scpool.getCreateTime().equals(endDateStr)){
+					ascList.add(scpool);
+				}
 			}
 		}
 
@@ -163,7 +153,7 @@ public class Monitor_9999931 {
 
 
 		// 发email
-//		helper.sendEmail(allScpoolStatus.toString(),9999931,endDateStr);
+//		helper.sendEmail(allScpoolStatus.toString(),999993,endDateStr);
 
 //		System.out.println(">>>>>>>>>>>>>>>>>> result.size="+Results.size());
 //		for (stockCode result : Results) {

@@ -935,8 +935,12 @@ public class Monitor_88884641 {
 //			    if(resultList2Days!=null && resultList2Days.size()>0){
 //			    	historytradeInfo historytradeInfo = resultList2Days.get(0);
 //					scpool scpool = new scpool(result.getNAME(),result.getSYMBOL(), "8888463",endDateStr,historytradeInfo.getTrade_date(),historytradeInfo.getOpen());
-					Scpool scpool = new Scpool(result.getNAME(),result.getSYMBOL(), "88884641",endDateStr,"",0.0);
-					scpoolRepository.save(scpool);
+
+
+//					Scpool scpool = new Scpool(result.getNAME(),result.getSYMBOL(), "88884641",endDateStr,"",0.0);
+//					scpoolRepository.save(scpool);
+
+
 //			    }
 //			}
 			
