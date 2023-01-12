@@ -69,6 +69,7 @@ public class DailyController {
 	@Autowired
 	Monitor_99999 monitor_99999;
 
+
 	@Autowired
 	Monitor_999991 monitor_999991;
 
