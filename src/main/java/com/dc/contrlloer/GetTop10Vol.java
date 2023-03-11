@@ -18,6 +18,7 @@ public class GetTop10Vol {
     Top10ValService top10ValService;
 
 
+
     @RequestMapping(value = "top10Vol", method = RequestMethod.GET)
     public List<HistorytradeInfo> getTop10Val(String endDateStr) throws Exception {
         List<HistorytradeInfo> hisList =  top10ValService.getTop10Val(endDateStr);
