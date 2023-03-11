@@ -39,7 +39,7 @@ public class DailyController {
 	Monitor_8878 monitor_8878;
 
 	@Autowired
-	Monitor4ASC815_22_881 monitor4ASC815_22_881;
+	Monitor_881 monitor4ASC815_22_881;
 
 	@Autowired
 	Monitor_8848 monitor_8848;
@@ -107,7 +107,7 @@ public class DailyController {
 			endDateStr=sdf.format(dt);
 			boolean isSendEmailEveryDay = false;
 
-//			String endDateStr = "20220909";
+//			String endDateStr = "20230309";
 //			boolean isSendEmailEveryDay = true;
 
 			SimpleDateFormat format =  new SimpleDateFormat( "yyyyMMdd");
@@ -125,8 +125,8 @@ public class DailyController {
 				this.shortTermIndexRisk(nowStr,endDateStr);
 
 				// 突破 第一板
-				System.out.println("monitor4ASC815_22_8888464 and date="+endDateStr);
-				List<StockCode> Results8888464old = monitor4ASC815_22_8888464.getFinal(endDateStr);
+//				System.out.println("monitor4ASC815_22_8888464 and date="+endDateStr);
+//				List<StockCode> Results8888464old = monitor4ASC815_22_8888464.getFinal(endDateStr);
 
 				// 突破 第一板
 				System.out.println("monitor4ASC815_22_88884641 and date="+endDateStr);
@@ -143,6 +143,7 @@ public class DailyController {
 				System.out.println("monitor4ASC815_22_881 and date="+endDateStr);
 				List<StockCode> Results881 = monitor4ASC815_22_881.getFinal(endDateStr);
 
+
 				if(nowStr.equals(endDateStr)){
 					sendEmailWithDate(Results88781, 88781, endDateStr);
 					sendEmailWithDate(Results881, 881, endDateStr);
@@ -155,12 +156,15 @@ public class DailyController {
 				endDateStr = helper.getNextWorkDay(endDateStr);
 				Date date = format.parse(endDateStr);
 
-				Date date2 = format.parse("20220909");
+				Date date2 = format.parse("20230121");
 				Date now  = new Date();
 
 				if(date.getTime()>=now.getTime()){
 					break;
 				}
+
+
+
 
 
 
@@ -188,6 +192,8 @@ public class DailyController {
 //				if(nowStr.equals(endDateStr)){
 //					sendEmailWithDate(Results888887, 888887, endDateStr);
 //				}
+//
+
 //
 //				System.out.println("monitor4ASC815_22_888888 and date="+endDateStr);
 //				List<StockCode> Results888888 = monitor_888888.getFinal(endDateStr);

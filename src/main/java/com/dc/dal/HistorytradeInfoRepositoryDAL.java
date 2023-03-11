@@ -15,6 +15,8 @@ public interface HistorytradeInfoRepositoryDAL {
 	
 	public List<HistorytradeInfo> findHistorytradeInfoByDesc(String code, String startDate, String endDate)throws Exception;
 	public List<HistorytradeInfo> findHistorytradeInfoByDesc4MA30_MA60(String code, String startDate, String endDate)throws Exception;
+
+	public List<HistorytradeInfo> findHistorytradeInfoByDate(String startDate) throws Exception;
 	public List<HistorytradeInfo> findHistorytradeInfoByDesc4MA30_MA60_ASC(String code, String startDate, String endDate) throws Exception;
 	
 	public void updateHistorytradeInfoById(HistorytradeInfo request)throws Exception;

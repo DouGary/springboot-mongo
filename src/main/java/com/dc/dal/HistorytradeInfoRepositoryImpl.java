@@ -3,6 +3,7 @@ package com.dc.dal;
 
 import com.dc.dal.HistorytradeInfoRepositoryDAL;
 import com.dc.model.HistorytradeInfo;
+import jdk.xml.internal.XMLSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
@@ -104,6 +105,22 @@ public class HistorytradeInfoRepositoryImpl implements HistorytradeInfoRepositor
 		 } catch (Exception e) {
              e.printStackTrace();
          }
+		return queryResults;
+	}
+
+
+	@Override
+	public List<HistorytradeInfo> findHistorytradeInfoByDate(String startDate) throws Exception {
+		List<HistorytradeInfo> queryResults = null;
+		try {
+			Query query = new Query();
+			query.addCriteria(where("trade_date").is(startDate));
+			query.with(Sort.by(Sort.Order.desc("vol")));
+			query.limit(10);
+			queryResults = mongoTemplate.find(query, HistorytradeInfo.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return queryResults;
 	}
 	

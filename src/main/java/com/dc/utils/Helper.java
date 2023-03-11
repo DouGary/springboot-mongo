@@ -267,6 +267,28 @@ public class Helper {
 		return dateStr;
 	}
 
+	public String getTradeDate(String endDateStr) throws ParseException
+	{
+		SimpleDateFormat format =  new SimpleDateFormat( "yyyyMMdd");
+
+		// 创建 Calendar 对象
+		Calendar now = Calendar.getInstance();
+		int index=now.get(Calendar.DAY_OF_WEEK)-1;
+		String[] weeks = new String[]{"星期天","星期一","星期二","星期三","星期四","星期五","星期六"};
+		System.out.println("今天是"+weeks[index]);
+		if(weeks[index].equals("星期天")){
+			int days = -2;
+			now.add(Calendar.DAY_OF_MONTH, days);
+		}
+		if(weeks[index].equals("星期六")){
+			int days = -1;
+			now.add(Calendar.DAY_OF_MONTH, days);
+		}
+
+		String dateStr = format.format(now.getTime());
+		return dateStr;
+	}
+
 
 	public String getStartDateStr15daysBefore(String endDateStr, int days) throws ParseException
 	{
