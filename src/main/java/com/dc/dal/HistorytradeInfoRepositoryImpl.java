@@ -3,7 +3,6 @@ package com.dc.dal;
 
 import com.dc.dal.HistorytradeInfoRepositoryDAL;
 import com.dc.model.HistorytradeInfo;
-import jdk.xml.internal.XMLSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
